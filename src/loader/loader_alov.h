@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -25,7 +25,7 @@ public:
   // with the same proportion from each category.
   void get_videos(const bool get_train, std::vector<Video>* videos) const;
 
-private:  
+private:
   // Make this method private to ensure it doesn't get called.
   const std::vector<Video>& get_videos() const { return videos_; }
 

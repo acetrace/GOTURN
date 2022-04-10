@@ -20,11 +20,13 @@ message("Open CV version is ${OpenCV_VERSION}")
 add_definitions(${Opencv_DEFINITIONS})
 message("Opencv_DEFINITIONS is ${Opencv_DEFINITIONS}")
 
-find_package(CUDA REQUIRED)
+# find_package(CUDA REQUIRED)
 # Note: If can't find CUDA, please uncomment the below line and set the path manually
 # set(CUDA_INCLUDE_DIRS /path_to_cuda/include)
-include_directories(${CUDA_INCLUDE_DIRS})
-message("CUDA_INCLUDE_DIRS is ${CUDA_INCLUDE_DIRS}")
+# include_directories(${CUDA_INCLUDE_DIRS})
+# message("CUDA_INCLUDE_DIRS is ${CUDA_INCLUDE_DIRS}")
+
+include_directories("/opt/homebrew/opt/openblas/include")
 
 
 find_package(Caffe REQUIRED)
@@ -34,7 +36,7 @@ find_package(Caffe REQUIRED)
 # set(Caffe_INCLUDE_DIRS /path_to_caffe/build/install/include)
 include_directories(${Caffe_INCLUDE_DIRS})
 # Uncomment for CPU only:
-# set(Caffe_DEFINITIONS -DCPU_ONLY)
+set(Caffe_DEFINITIONS -DCPU_ONLY)
 add_definitions(${Caffe_DEFINITIONS})
 message("Caffe_DEFINITIONS is ${Caffe_DEFINITIONS}")
 message("Caffe_DIR is ${Caffe_DIR}")
@@ -96,7 +98,7 @@ add_executable (test_tracker_vot src/test/test_tracker_vot.cpp)
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} ${Caffe_LIBRARIES} ${GLOG_LIB})
 target_link_libraries (test_tracker_vot ${PROJECT_NAME})
 # Note: If can't find trax, please download trax and build it, then uncomment the below line and set the path manually
-# target_link_libraries(${PROJECT_NAME} /path_to_trax/build/libtrax.so)
+target_link_libraries(${PROJECT_NAME} /Users/ivkin/git/trax/build/libtraxstatic.a)
 
 add_executable (test_tracker_alov src/test/test_tracker_alov.cpp)
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} ${Caffe_LIBRARIES} ${GLOG_LIB})

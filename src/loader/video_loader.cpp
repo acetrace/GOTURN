@@ -1,6 +1,6 @@
 #include "video_loader.h"
 
-#include <opencv/cv.h>
+#include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -78,7 +78,7 @@ void VideoLoader::ShowVideosShift() const {
         cv::namedWindow("Raw image", cv::WINDOW_AUTOSIZE);// Create a window for display.
         cv::imshow("Raw image", full_image_with_bbox);                   // Show our image inside it.
 #endif
-          
+
         example_generator.Reset(bbox_prev, bbox, image_prev, raw_image);
         example_generator.set_indices(video_index, frame_index);
 
