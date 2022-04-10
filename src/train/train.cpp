@@ -85,9 +85,9 @@ void train_video(const std::vector<Video>& videos, TrackerTrainer* tracker_train
 } // namespace
 
 int main (int argc, char *argv[]) {
-  if (argc < 14) {
+  if (argc < 12) {
     std::cerr << "Usage: " << argv[0]
-              << " videos_folder_imagenet annotations_folder_imagenet"
+              //<< " videos_folder_imagenet annotations_folder_imagenet"
               << " alov_videos_folder alov_annotations_folder"
               << " network.caffemodel train.prototxt val.prototxt"
               << " solver_file"
@@ -102,8 +102,8 @@ int main (int argc, char *argv[]) {
   ::google::InitGoogleLogging(argv[0]);
 
   int arg_index = 1;
-  const string& videos_folder_imagenet      = argv[arg_index++];
-  const string& annotations_folder_imagenet = argv[arg_index++];
+//  const string& videos_folder_imagenet      = argv[arg_index++];
+//  const string& annotations_folder_imagenet = argv[arg_index++];
   const string& alov_videos_folder      = argv[arg_index++];
   const string& alov_annotations_folder = argv[arg_index++];
   const string& caffe_model   = argv[arg_index++];
@@ -128,10 +128,10 @@ int main (int argc, char *argv[]) {
   caffe::Caffe::SetDevice(gpu_id);
 #endif
 
-  // Load the image data.
-  LoaderImagenetDet image_loader(videos_folder_imagenet, annotations_folder_imagenet);
-  const std::vector<std::vector<Annotation> >& train_images = image_loader.get_images();
-  printf("Total training images: %zu\n", train_images.size());
+//  // Load the image data.
+//  LoaderImagenetDet image_loader(videos_folder_imagenet, annotations_folder_imagenet);
+//  const std::vector<std::vector<Annotation> >& train_images = image_loader.get_images();
+//  printf("Total training images: %zu\n", train_images.size());
 
   // Load the video data.
   LoaderAlov alov_video_loader(alov_videos_folder, alov_annotations_folder);
@@ -154,7 +154,7 @@ int main (int argc, char *argv[]) {
   // Train tracker.
   while (tracker_trainer.get_num_batches() < kNumBatches) {
     // Train on an image example.
-    train_image(image_loader, train_images, &tracker_trainer);
+    //train_image(image_loader, train_images, &tracker_trainer);
 
     // Train on a video example.
     train_video(train_videos, &tracker_trainer);

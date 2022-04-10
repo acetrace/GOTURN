@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ -z "$4" ]
+if [ -z "$2" ]
   then
     echo "No folder supplied!"
-    echo "Usage: bash `basename "$0"` imagenet_folder imagenet_annotations_folder alov_videos_folder alov_annotations_folder"
+    echo "Usage: bash `basename "$0"` alov_videos_folder alov_annotations_folder"
     exit
 fi
 
@@ -12,11 +12,12 @@ FOLDER=GOTURN1
 RANDOM_SEED=800
 
 echo FOLDER: $FOLDER
+echo RESULT_DIR: $RESULT_DIR
 
-VIDEOS_FOLDER_IMAGENET=$1
-ANNOTATIONS_FOLDER_IMAGENET=$2
-VIDEOS_FOLDER=$3
-ANNOTATIONS_FOLDER=$4
+#VIDEOS_FOLDER_IMAGENET=$1
+#ANNOTATIONS_FOLDER_IMAGENET=$2
+VIDEOS_FOLDER=$1
+ANNOTATIONS_FOLDER=$2
 SOLVER=nets/solver.prototxt
 TRAIN_PROTO=nets/tracker.prototxt
 CAFFE_MODEL=nets/models/weights_init/tracker_init.caffemodel
@@ -45,4 +46,4 @@ MAX_SCALE=0.4
 echo LAMBDA_SCALE: $LAMBDA_SCALE
 echo LAMBDA_SHIFT: $LAMBDA_SHIFT
 
-build/train $VIDEOS_FOLDER_IMAGENET $ANNOTATIONS_FOLDER_IMAGENET $VIDEOS_FOLDER $ANNOTATIONS_FOLDER $CAFFE_MODEL $TRAIN_PROTO $SOLVER_TEMP $LAMBDA_SHIFT $LAMBDA_SCALE $MIN_SCALE $MAX_SCALE $GPU_ID $RANDOM_SEED 2> $RESULT_DIR/results.txt
+build/train $VIDEOS_FOLDER $ANNOTATIONS_FOLDER $CAFFE_MODEL $TRAIN_PROTO $SOLVER_TEMP $LAMBDA_SHIFT $LAMBDA_SCALE $MIN_SCALE $MAX_SCALE $GPU_ID $RANDOM_SEED
