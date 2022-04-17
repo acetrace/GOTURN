@@ -32,27 +32,27 @@ LoaderAlov::LoaderAlov(const string& video_folder, const string& annotations_fol
 
   const int max_categories = kDoTest ? 3 : categories.size();
 
-  //printf("Found %zu categories...\n", categories.size());
+  printf("Found %zu categories...\n", categories.size());
   for (size_t i = 0; i < max_categories; ++i) {
     Category category;
 
     const string& category_name = categories[i];
     const string& category_path = annotations_folder + "/" + category_name;
 
-    //printf("Loading category: %s\n", category_name.c_str());
+    printf("Loading category: %s\n", category_name.c_str());
 
     // Find the annotation files.
     const boost::regex annotation_filter(".*\\.ann");
     vector<string> annotation_files;
     find_matching_files(category_path, annotation_filter, &annotation_files);
 
-    //printf("Found %zu annotations\n", annotation_files.size());
+    printf("Found %zu annotations\n", annotation_files.size());
 
     // Iterate over all annotation files (one annotation file per video).
     for (size_t j = 0; j < annotation_files.size(); ++j) {
       const string& annotation_file = annotation_files[j];
 
-      //printf("Processing annotation file: %s\n", annotation_file.c_str());
+      printf("Processing annotation file: %s\n", annotation_file.c_str());
 
       // Read annotations for a given video.
       Video video;
@@ -61,7 +61,7 @@ LoaderAlov::LoaderAlov(const string& video_folder, const string& annotations_fol
       const string video_path = video_folder + "/" + category_name + "/" +
           annotation_file.substr(0, annotation_file.length() - 4);
       video.path = video_path;
-      //printf("Video path: %s\n", video_path.c_str());
+      printf("Video path: %s\n", video_path.c_str());
 
       // Add all image files
       const boost::regex image_filter(".*\\.jpg");
